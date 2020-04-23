@@ -48,11 +48,12 @@ function run(db) {
 	
 	do{
 		var items = 0;
-		fetchPage("https://www.habinedita.com/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10", function (body) {
+		var next = "/imoveis/?pg=1&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10"
+		fetchPage("https://www.habinedita.com"+next, function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
-			var tag = $('a.paginacao-nav').attr('href');
-			console.log("tag :"+tag);
+			var next = $('a.paginacao-nav').attr('href');
+			console.log("next :"+next);
 			var elements = $(".lbl_preco").each(function () {
 				var nome = $(this).text().trim();
 				var url = $(this).parent().attr('href');
@@ -65,7 +66,7 @@ function run(db) {
 		});
 		page++;
 		console.log("in page "+page);
-	}while(items > 14);
+	}while(next != null);
 	console.log("out page "+page);
 	console.log("out items "+items);
 }
