@@ -61,8 +61,8 @@ function run(db) {
 
 			db.close();
 			items=items+1;
-			if(items=15){
-				pages=paages+1;
+			if(items==15){
+				pages=pages+1;
 			}
 			else{
 			  	pages=0;
