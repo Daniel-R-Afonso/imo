@@ -52,7 +52,7 @@ function run(db) {
 		fetchPage("https://www.habinedita.com"+next, function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
-			var next = $('a.paginacao-nav').attr('href');
+			next = $('a.paginacao-nav').attr('href');
 			console.log("next :"+next);
 			var elements = $(".lbl_preco").each(function () {
 				var nome = $(this).text().trim();
