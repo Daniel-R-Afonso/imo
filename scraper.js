@@ -60,7 +60,10 @@ function run(db) {
 			db.close();
 		});
 		page++;
+		console.log(page);
 	}while(items > 14);
+	console.log(page);
+	console.log(items);
 }
 
 initDatabase(run);
