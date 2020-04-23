@@ -19,6 +19,10 @@ function updateRow(db, valor, url) {
 	var datetime = new Date();
 	var statement = db.prepare("INSERT INTO habinedita VALUES (?,?,?)");
 	statement.run(valor,url,datetime);
+	var wait=50000;
+	do{
+	   wait--;
+	}while(wait!=0)
 	statement.finalize();
 }
 
@@ -53,29 +57,17 @@ function run(db) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
 			next = $('a.paginacao-nav').attr('href');
-			var wait=50000;
-				do{
-				   wait--;
-				}while(wait!=0)
 			console.log("next :"+next);
 			var elements = $(".lbl_preco").each(function () {
 				var nome = $(this).text().trim();
 				var url = $(this).parent().attr('href');
 				items++;
 				console.log(items);
-				var wait=50000;
-				do{
-				   wait--;
-				}while(wait!=0)
 				updateRow(db, nome, url);
 			});
 			readRows(db);
 			db.close();
 		});
-		var wait=50000;
-				do{
-				   wait--;
-				}while(wait!=0)
 		page++;
 		console.log("in page "+page);
 		
