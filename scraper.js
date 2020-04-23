@@ -18,13 +18,13 @@ function updateRow(db, valor, url) {
 	// Insert some data.
 	var datetime = new Date();
 	var statement = db.prepare("INSERT INTO habinedita VALUES (?,?,?)");
-	statement.run(valor,url,strftime('%s','now'));
+	statement.run(valor,url,datetime);
 	statement.finalize();
 }
 
 function readRows(db) {
 	// Read some data.
-	db.each("SELECT rowid AS id, valor,url,date FROM habinedita", function(err, row) {
+	db.each("SELECT rowid AS id, valor,url,date(date) FROM habinedita", function(err, row) {
 		console.log(row.id + ": " + row.valor + ": " + row.url + ": " + row.date);
 	});
 }
