@@ -37,7 +37,7 @@ function fetchPage(url, callback) {
 			return;
 		}
 
-		callback(body);
+		reutrn callback(body);
 	});
 }
 
