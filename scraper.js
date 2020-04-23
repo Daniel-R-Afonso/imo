@@ -4,26 +4,21 @@ var cheerio = require("cheerio");
 var request = require("request");
 var sqlite3 = require("sqlite3").verbose();
 
-function deleteDatabase(db) {
-	// Set up sqlite database.
-	db.serialize(function() {
-		db.run("DROP TABLE IF EXISTS data");
-	});
-}
-
 function initDatabase(callback) {
 	// Set up sqlite database.
 	var db = new sqlite3.Database("data.sqlite");
 	db.serialize(function() {
-		db.run("CREATE TABLE IF NOT EXISTS habinedita (valor TEXT,url TEXT)");
+		db.run("DROP TABLE IF EXISTS habinedita");
+		db.run("CREATE TABLE IF NOT EXISTS habinedita (valor TEXT,url TEXT,date TEXT)");
 		callback(db);
 	});
 }
 
 function updateRow(db, valor, url) {
 	// Insert some data.
-	var statement = db.prepare("INSERT INTO habinedita VALUES (?,?)");
-	statement.run(valor,url);
+	var datetime = new Date();
+	var statement = db.prepare("INSERT INTO habinedita VALUES (?,?,?)");
+	statement.run(valor,url,datetime);
 	statement.finalize();
 }
 
@@ -60,7 +55,7 @@ function run(db) {
 		});
 
 		readRows(db);
-		deleteDatabase(db);
+		
 		db.close();
 	});
 }
