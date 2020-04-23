@@ -43,21 +43,32 @@ function fetchPage(url, callback) {
 
 function run(db) {
 	// Use request to read in pages.
-	fetchPage("https://www.habinedita.com/imoveis/?pg=1&o=1&g=1&dd=13&cc=12&nq=2-4&p=-200000&ct=0000000000001&or=10", function (body) {
-		// Use cheerio to find things in the page with css selectors.
-		var $ = cheerio.load(body);
+	var pages=1
+	do{
+		var items = 0;
+		fetchPage("https://www.habinedita.com/imoveis/?pg=1&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10", function (body) {
+			// Use cheerio to find things in the page with css selectors.
+			var $ = cheerio.load(body);
 
-		var elements = $(".lbl_preco").each(function () {
-			var nome = $(this).text().trim();
-			var url = $(this).parent().attr('href');
+			var elements = $(".lbl_preco").each(function () {
+				var nome = $(this).text().trim();
+				var url = $(this).parent().attr('href');
 
-			updateRow(db, nome, url);
+				updateRow(db, nome, url);
+			});
+			
+			readRows(db);
+
+			db.close();
+			items=items+1;
+			if(items=15){
+				pages=paages+1;
+			}
+			else{
+			  	pages=0;
+			}
 		});
-
-		readRows(db);
-
-		db.close();
-	});
+	}while(pages!=0)
 }
 
 initDatabase(run);
