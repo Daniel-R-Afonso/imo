@@ -24,7 +24,7 @@ function updateRow(db, valor, url) {
 
 function readRows(db) {
 	// Read some data.
-	db.each("SELECT rowid AS id, valor,url,date(date) FROM habinedita", function(err, row) {
+	db.each("SELECT rowid AS id, valor, url, datetime(date, 'unixepoch') FROM habinedita", function(err, row) {
 		console.log(row.id + ": " + row.valor + ": " + row.url + ": " + row.date);
 	});
 }
@@ -50,12 +50,12 @@ function run(db) {
 		var elements = $(".lbl_preco").each(function () {
 			var nome = $(this).text().trim();
 			var url = $(this).parent().attr('href');
-			console.log(url)
+
 			updateRow(db, nome, url);
 		});
 
 		readRows(db);
-		
+
 		db.close();
 	});
 }
