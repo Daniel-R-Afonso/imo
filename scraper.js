@@ -59,6 +59,10 @@ function run(db) {
 				var url = $(this).parent().attr('href');
 				items++;
 				console.log(items);
+				var wait=25000;
+				do{
+				   wait--;
+				}while(wait!=0)
 				updateRow(db, nome, url);
 			});
 			readRows(db);
@@ -66,10 +70,7 @@ function run(db) {
 		});
 		page++;
 		console.log("in page "+page);
-		var wait=25000;
-		do{
-		   wait--;
-		}while(wait!=0)
+		
 	}while(page < 4);
 	console.log("out page "+page);
 	console.log("out items "+items);
