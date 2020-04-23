@@ -53,7 +53,7 @@ function run(db) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
 			next = $('a.paginacao-nav').attr('href');
-			var wait=25000;
+			var wait=50000;
 				do{
 				   wait--;
 				}while(wait!=0)
@@ -63,7 +63,7 @@ function run(db) {
 				var url = $(this).parent().attr('href');
 				items++;
 				console.log(items);
-				var wait=25000;
+				var wait=50000;
 				do{
 				   wait--;
 				}while(wait!=0)
@@ -72,6 +72,10 @@ function run(db) {
 			readRows(db);
 			db.close();
 		});
+		var wait=50000;
+				do{
+				   wait--;
+				}while(wait!=0)
 		page++;
 		console.log("in page "+page);
 		
