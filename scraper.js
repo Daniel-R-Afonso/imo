@@ -67,7 +67,7 @@ function run(db) {
 			page=0;
 		}
 		console.log(page);
-	}while(page!=0);
+	}while(page!==0);
 }
 
 initDatabase(run);
