@@ -62,13 +62,13 @@ function run(db) {
 		
 		if(items>14){
 			page++;
-			console.log(page);
-			console.log(items);
+			console.log("1page "+page);
+			console.log("1items "+items);
 		}
 		else{
 			page=0;
-			console.log(page);
-			console.log(items);
+			console.log("2page "+page);
+			console.log("2items "+items);
 		}
 		
 		
