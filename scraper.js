@@ -61,14 +61,17 @@ function run(db) {
 
 			db.close();
 			items=items+1;
+			console.log(items);
 			
 		});
+		
 		if(items==15){
 			page=page+1;
 		}
 		else{
 			page=0;
 		}
+		console.log(page);
 	}while(page!=0);
 }
 
