@@ -4,6 +4,14 @@ var cheerio = require("cheerio");
 var request = require("request");
 var sqlite3 = require("sqlite3").verbose();
 
+function deleteDatabase(db) {
+	// Set up sqlite database.
+	db.serialize(function() {
+		db.run("DROP TABLE IF EXISTS data");
+		callback(db);
+	});
+}
+
 function initDatabase(callback) {
 	// Set up sqlite database.
 	var db = new sqlite3.Database("data.sqlite");
@@ -53,7 +61,7 @@ function run(db) {
 		});
 
 		readRows(db);
-
+		deleteDatabase(db);
 		db.close();
 	});
 }
