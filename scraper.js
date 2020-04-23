@@ -66,7 +66,7 @@ function run(db) {
 		});
 		page++;
 		console.log("in page "+page);
-		var wait=5000;
+		var wait=25000;
 		do{
 		   wait--;
 		}while(wait!=0)
