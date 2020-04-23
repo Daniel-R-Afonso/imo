@@ -31,14 +31,14 @@ function readRows(db) {
 
 function fetchPage(url, callback) {
 	// Use request to read in pages.
-	request(url, function (error, response, body) {
+	setTimeout(request(url, function (error, response, body) {
 		if (error) {
 			console.log("Error requesting page: " + error);
 			return;
 		}
 
 		callback(body);
-	});
+	}),1000);
 }
 
 function run(db) {
@@ -49,7 +49,7 @@ function run(db) {
 	do{
 		var items = 0;
 		var next = "/imoveis/?pg=4&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10"
-		setTimeout(fetchPage("https://www.habinedita.com"+next, function (body) {
+		fetchPage("https://www.habinedita.com"+next, function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
 			next = $('a.paginacao-nav').attr('href');
@@ -63,7 +63,7 @@ function run(db) {
 			});
 			readRows(db);
 			db.close();
-		}),1000);
+		});
 		page++;
 		console.log("in page "+page);
 	}while(next != undefined);
