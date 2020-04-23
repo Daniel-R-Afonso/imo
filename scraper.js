@@ -53,6 +53,10 @@ function run(db) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
 			next = $('a.paginacao-nav').attr('href');
+			var wait=25000;
+				do{
+				   wait--;
+				}while(wait!=0)
 			console.log("next :"+next);
 			var elements = $(".lbl_preco").each(function () {
 				var nome = $(this).text().trim();
