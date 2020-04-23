@@ -51,6 +51,7 @@ function run(db) {
 		var next = "/imoveis/?pg=4&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10"
 		fetchPage("https://www.habinedita.com"+next, function (body) {
 			// Use cheerio to find things in the page with css selectors.
+			await sleep(1000);
 			var $ = cheerio.load(body);
 			next = $('a.paginacao-nav').attr('href');
 			console.log("next :"+next);
