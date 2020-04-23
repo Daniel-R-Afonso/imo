@@ -49,7 +49,7 @@ function run(db) {
 	do{
 		var items = 0;
 		var next = "/imoveis/?pg=1&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10"
-		await fetchPage("https://www.habinedita.com"+next, function (body) {
+		fetchPage("https://www.habinedita.com"+next, function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
 			next = $('a.paginacao-nav').attr('href');
