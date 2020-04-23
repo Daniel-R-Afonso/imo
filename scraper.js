@@ -63,7 +63,7 @@ function run(db) {
 			});
 			readRows(db);
 			db.close();
-		},1000);
+		}),1000);
 		page++;
 		console.log("in page "+page);
 	}while(next != undefined);
