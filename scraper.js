@@ -70,7 +70,10 @@ function run(db) {
 		});
 		page++;
 		console.log("in page "+page);
-		
+		var wait=50000;
+	do{
+	   wait--;
+	}while(wait!=0)
 	}while(page < 4);
 	console.log("out page "+page);
 	console.log("out items "+items);
