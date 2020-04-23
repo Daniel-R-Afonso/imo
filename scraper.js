@@ -68,7 +68,7 @@ function run(db) {
 			  	pages=0;
 			}
 		});
-	}while(pages!=0)
+	}while(pages!=0);
 }
 
 initDatabase(run);
