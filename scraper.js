@@ -8,21 +8,21 @@ function initDatabase(callback) {
 	// Set up sqlite database.
 	var db = new sqlite3.Database("data.sqlite");
 	db.serialize(function() {
-		db.run("CREATE TABLE IF NOT EXISTS data (valor TEXT,url TEXT)");
+		db.run("CREATE TABLE IF NOT EXISTS habinedita (valor TEXT,url TEXT)");
 		callback(db);
 	});
 }
 
 function updateRow(db, valor, url) {
 	// Insert some data.
-	var statement = db.prepare("INSERT INTO data VALUES (?,?)");
+	var statement = db.prepare("INSERT INTO habinedita VALUES (?,?)");
 	statement.run(valor,url);
 	statement.finalize();
 }
 
 function readRows(db) {
 	// Read some data.
-	db.each("SELECT rowid AS id, valor,url FROM data", function(err, row) {
+	db.each("SELECT rowid AS id, valor,url FROM habinedita", function(err, row) {
 		console.log(row.id + ": " + row.name);
 	});
 }
