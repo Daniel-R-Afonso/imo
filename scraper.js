@@ -49,24 +49,19 @@ function run(db) {
 		fetchPage("https://www.habinedita.com/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10", function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
-
 			var elements = $(".lbl_preco").each(function () {
 				var nome = $(this).text().trim();
 				var url = $(this).parent().attr('href');
-
+				items++;
+				console.log(items);
 				updateRow(db, nome, url);
 			});
-			
 			readRows(db);
-
 			db.close();
-			items=items+1;
-			console.log(items);
-			
 		});
 		
 		if(items==15){
-			page=page+1;
+			page++;
 		}
 		else{
 			page=0;
