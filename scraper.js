@@ -8,21 +8,21 @@ function initDatabase(callback) {
 	// Set up sqlite database.
 	var db = new sqlite3.Database("data.sqlite");
 	db.serialize(function() {
-		db.run("CREATE TABLE IF NOT EXISTS data (name TEXT)");
+		db.run("CREATE TABLE IF NOT EXISTS data (valor TEXT,url TEXT)");
 		callback(db);
 	});
 }
 
-function updateRow(db, value) {
+function updateRow(db, valor, url) {
 	// Insert some data.
-	var statement = db.prepare("INSERT INTO data VALUES (?)");
-	statement.run(value);
+	var statement = db.prepare("INSERT INTO data VALUES (?,?)");
+	statement.run(valor,url);
 	statement.finalize();
 }
 
 function readRows(db) {
 	// Read some data.
-	db.each("SELECT rowid AS id, name FROM data", function(err, row) {
+	db.each("SELECT rowid AS id, valor,url FROM data", function(err, row) {
 		console.log(row.id + ": " + row.name);
 	});
 }
@@ -41,13 +41,14 @@ function fetchPage(url, callback) {
 
 function run(db) {
 	// Use request to read in pages.
-	fetchPage("https://www.habinedita.com/imoveis/?pg=2&o=1&g=1&dd=13&cc=12&nq=2-2&p=100000-225000&dioma=pt", function (body) {
+	fetchPage("https://www.habinedita.com/imoveis/?pg=1&o=1&g=1&dd=13&cc=12&nq=2-2&p=100000-225000&dioma=pt", function (body) {
 		// Use cheerio to find things in the page with css selectors.
 		var $ = cheerio.load(body);
 
 		var elements = $(".lbl_preco").each(function () {
-			var value = $(this).text().trim();
-			updateRow(db, value);
+			var nome = $(this).text().trim();
+			var url = $(this).parent().attr("href");
+			updateRow(db, nome, url);
 		});
 
 		readRows(db);
