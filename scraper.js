@@ -66,7 +66,7 @@ function run(db) {
 		});
 		page++;
 		console.log("in page "+page);
-	}while(page <= 5);
+	}while(next != undefined);
 	console.log("out page "+page);
 	console.log("out items "+items);
 }
