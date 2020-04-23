@@ -60,7 +60,7 @@ function run(db) {
 			db.close();
 		});
 		
-		if(items==15){
+		if(items>14){
 			page++;
 			console.log(page);
 			console.log(items);
