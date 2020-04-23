@@ -41,6 +41,10 @@ function fetchPage(url, callback) {
 	});
 }
 
+function wait(milleseconds) {
+  return new Promise(resolve => setTimeout(resolve, milleseconds))
+}
+
 function run(db) {
 	// Use request to read in pages.
 	var page=1
@@ -52,6 +56,7 @@ function run(db) {
 		fetchPage("https://www.habinedita.com"+next, function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
+			await wait(500);
 			next = $('a.paginacao-nav').attr('href');
 			console.log("next :"+next);
 			var elements = $(".lbl_preco").each(function () {
