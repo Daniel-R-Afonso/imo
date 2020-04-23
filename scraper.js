@@ -19,10 +19,6 @@ function updateRow(db, valor, url) {
 	var datetime = new Date();
 	var statement = db.prepare("INSERT INTO habinedita VALUES (?,?,?)");
 	statement.run(valor,url,datetime);
-	var wait=50000;
-	do{
-	   wait--;
-	}while(wait!=0)
 	statement.finalize();
 }
 
@@ -70,10 +66,6 @@ function run(db) {
 		});
 		page++;
 		console.log("in page "+page);
-		var wait=50000;
-	do{
-	   wait--;
-	}while(wait!=0)
 	}while(page < 4);
 	console.log("out page "+page);
 	console.log("out items "+items);
