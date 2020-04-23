@@ -60,7 +60,7 @@ function run(db) {
 				items++;
 				console.log(items);
 				updateRow(db, nome, url);
-			}),1000);
+			},1000));
 			readRows(db);
 			db.close();
 		});
