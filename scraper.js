@@ -43,10 +43,10 @@ function fetchPage(url, callback) {
 
 function run(db) {
 	// Use request to read in pages.
-	var pages=1
+	var page=1
 	do{
 		var items = 0;
-		fetchPage("https://www.habinedita.com/imoveis/?pg=1&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10", function (body) {
+		fetchPage("https://www.habinedita.com/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10", function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
 
@@ -64,12 +64,12 @@ function run(db) {
 			
 		});
 		if(items==15){
-			pages=pages+1;
+			page=page+1;
 		}
 		else{
-			pages=0;
+			page=0;
 		}
-	}while(pages!=0);
+	}while(page!=0);
 }
 
 initDatabase(run);
