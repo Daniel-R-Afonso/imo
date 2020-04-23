@@ -31,14 +31,14 @@ function readRows(db) {
 
 function fetchPage(url, callback) {
 	// Use request to read in pages.
-	setTimeout(request(url, function (error, response, body) {
+	request(url, function (error, response, body) {
 		if (error) {
 			console.log("Error requesting page: " + error);
 			return;
 		}
 
 		callback(body);
-	}),1000);
+	});
 }
 
 function run(db) {
