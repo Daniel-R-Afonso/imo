@@ -24,8 +24,8 @@ function updateRow(db, valor, url) {
 
 function readRows(db) {
 	// Read some data.
-	db.each("SELECT rowid AS id, valor, url, datetime(date, 'unixepoch') FROM habinedita", function(err, row) {
-		console.log(row.id + ": " + row.valor + ": " + row.url + ": " + row.date);
+	db.each("SELECT rowid AS id, valor, url, datetime(date, 'unixepoch') AS data FROM habinedita", function(err, row) {
+		console.log(row.id + ": " + row.valor + ": " + row.url + ": " + row.data);
 	});
 }
 
