@@ -60,15 +60,19 @@ function run(db) {
 			db.close();
 		});
 		
-		/*if(items==15){
+		if(items==15){
 			page++;
+			console.log(page);
+			console.log(items);
 		}
 		else{
 			page=0;
-		}*/
-		page++;
-		console.log(page);
-	}while(page<5);
+			console.log(page);
+			console.log(items);
+		}
+		
+		
+	}while(page != 0);
 }
 
 initDatabase(run);
