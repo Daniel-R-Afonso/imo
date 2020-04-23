@@ -41,11 +41,11 @@ function fetchPage(url, callback) {
 
 function run(db) {
 	// Use request to read in pages.
-	fetchPage("https://morph.io", function (body) {
+	fetchPage("https://www.habinedita.com/imoveis/?pg=2&o=1&g=1&dd=13&cc=12&nq=2-2&p=100000-225000&dioma=pt", function (body) {
 		// Use cheerio to find things in the page with css selectors.
 		var $ = cheerio.load(body);
 
-		var elements = $("div.media-body span.p-name").each(function () {
+		var elements = $(".lbl_preco").each(function () {
 			var value = $(this).text().trim();
 			updateRow(db, value);
 		});
