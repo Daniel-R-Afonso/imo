@@ -45,7 +45,7 @@ function wait(milleseconds) {
   return new Promise(resolve => setTimeout(resolve, milleseconds))
 }
 
-function run(db) {
+async function run(db) {
 	// Use request to read in pages.
 	var page=1
 	
