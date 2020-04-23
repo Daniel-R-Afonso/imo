@@ -59,20 +59,8 @@ function run(db) {
 			readRows(db);
 			db.close();
 		});
-		
-		if(items>14){
-			page++;
-			console.log("1page "+page);
-			console.log("1items "+items);
-		}
-		else{
-			page=-1;
-			console.log("2page "+page);
-			console.log("2items "+items);
-		}
-		
-		
-	}while(page < 0);
+		page++;
+	}while(items > 14);
 }
 
 initDatabase(run);
