@@ -51,7 +51,7 @@ function run(db) {
 		fetchPage("https://www.habinedita.com/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10", function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
-			var tag = $('a.paginacao-nav');
+			var tag = $('a.paginacao-nav').attr('href');
 			console.log("tag :"+tag);
 			var elements = $(".lbl_preco").each(function () {
 				var nome = $(this).text().trim();
