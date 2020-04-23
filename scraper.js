@@ -47,10 +47,7 @@ function run(db) {
 
 		var elements = $(".lbl_preco").each(function () {
 			var nome = $(this).text().trim();
-			Element pai = $(this).parent();
 			var url = $(this).parent().attr("href").text().trim();
-			console.log(url);
-			url = pai.attr("href").text().trim();
 			console.log(url);
 			updateRow(db, nome, url);
 		});
