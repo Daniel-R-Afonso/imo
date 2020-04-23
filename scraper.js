@@ -8,7 +8,6 @@ function deleteDatabase(db) {
 	// Set up sqlite database.
 	db.serialize(function() {
 		db.run("DROP TABLE IF EXISTS data");
-		callback(db);
 	});
 }
 
