@@ -66,13 +66,13 @@ function run(db) {
 			console.log("1items "+items);
 		}
 		else{
-			page=0;
+			page=-1;
 			console.log("2page "+page);
 			console.log("2items "+items);
 		}
 		
 		
-	}while(page != 0);
+	}while(page < 0);
 }
 
 initDatabase(run);
