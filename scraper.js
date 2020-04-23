@@ -48,7 +48,7 @@ function run(db) {
 		var elements = $(".lbl_preco").each(function () {
 			var nome = $(this).text().trim();
 			let parent = $(this).parent();
-			let classe = parent.get(0).tagName;
+			let classe = parent.get(0).attr('href');
 			console.log(classe)
 			//var url = $(this).parent().get(0).attr("href").text().trim();
 			//console.log(url);
