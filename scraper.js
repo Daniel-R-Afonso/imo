@@ -24,7 +24,7 @@ function updateRow(db, valor, url) {
 function readRows(db) {
 	// Read some data.
 	db.each("SELECT rowid AS id, valor, url, datetime(date, 'unixepoch') AS data FROM habinedita", function(err, row) {
-		console.log(row.id + ": " + row.valor + ": " + row.url + ": " + row.data);
+		//console.log(row.id + ": " + row.valor + ": " + row.url + ": " + row.data);
 	});
 }
 
@@ -51,8 +51,8 @@ function run(db) {
 		fetchPage("https://www.habinedita.com"+next, function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
-			next = $('.bloco-paginacao li').each(function () {
-				var pagina = $("a").text().trim();
+			next = $('.bloco-paginacao li a').each(function () {
+				var pagina = $(this).text().trim();
 			        console.log("pagina: "+pagina);
 		        });
 			next = $('a.paginacao-nav').attr('href');
