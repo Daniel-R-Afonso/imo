@@ -57,10 +57,10 @@ function run(db) {
 				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+pagina+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10", function (body) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
-					var elements = $("div.bloco2").each(function () {
+					var elements = $("div.titulos").each(function () {
 						var titulo = $('span.span_imovel_titulo').text().trim();
-						var nome = $('a.lbl_preco_holder').text().trim();
-						var url = $('a.lbl_preco_holder').attr('href');
+						var nome = $('span.lbl_preco').text().trim();
+						var url = $('a.lnk_titulo').attr('href');
 						console.log(titulo+" "+nome+" "+url);
 						items++;
 						console.log(items);
