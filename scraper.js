@@ -58,9 +58,9 @@ function run(db) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
 					var elements = $("div.titulos").each(function () {
-						var titulo = $('div.titulos > span.span_imovel_titulo').text().trim();
-						var nome = $('div.titulos > span.lbl_preco').text().trim();
-						var url = $('div.titulos > a.lnk_titulo').attr('href');
+						var titulo = $(this).find('span.span_imovel_titulo').text().trim();
+						var nome = $(this).find('span.lbl_preco').text().trim();
+						var url = $(this).find('a.lnk_titulo').attr('href');
 						console.log(titulo+" "+nome+" "+url);
 						//items++;
 						//console.log(items);
