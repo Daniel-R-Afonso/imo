@@ -60,7 +60,7 @@ function run(db) {
 					var elements = $("div.bloco2").each(function () {
 						var titulo = $('span.span_imovel_titulo').text().trim();
 						var nome = $('a.lbl_preco_holder').text().trim();
-						var url = $('a.lbl_preco_holder').parent().attr('href');
+						var url = $('a.lbl_preco_holder').attr('href');
 						console.log(titulo+" "+nome+" "+url);
 						items++;
 						console.log(items);
