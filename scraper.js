@@ -58,8 +58,6 @@ function run(db) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
 					var elements = $("div.titulos").each(function () {
-						console.log($(this));
-						$(this).
 						var titulo = $('div.titulos > span.span_imovel_titulo').text().trim();
 						var nome = $('div.titulos > span.lbl_preco').text().trim();
 						var url = $('div.titulos > a.lnk_titulo').attr('href');
