@@ -42,10 +42,10 @@ function fetchPage(url, callback) {
 	});
 }
 
-function fetchItem() {
-	var titulo = $(this).find('span.span_imovel_titulo').text().trim();
-	var nome = $(this).find('span.lbl_preco').text().trim();
-	var url = $(this).find('a.lnk_titulo').attr('href');
+function fetchItem(obj_this) {
+	var titulo = obj_this.find('span.span_imovel_titulo').text().trim();
+	var nome = obj_this.find('span.lbl_preco').text().trim();
+	var url = obj_this.find('a.lnk_titulo').attr('href');
 	console.log(titulo+" "+nome+" "+url);
 	items++;
 	console.log("item: "+items);
@@ -67,13 +67,13 @@ function run(db) {
 				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+pagina+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10", function (body) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
-					var elements = $("div.titulos").each(fetchItem());
+					var elements = $("div.titulos").each(fetchItem($(this)));
 				});
 			}
 
 		});
 	
-		var elements = $("div.titulos").each(fetchItem());
+		var elements = $("div.titulos").each(fetchItem($(this)));
 	});
 }
 
