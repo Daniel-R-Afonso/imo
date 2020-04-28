@@ -34,6 +34,8 @@ function fetchPage(url, callback) {
 		if (error) {
 			console.log("Error requesting page: " + error);
 			return;
+		}else{
+			console.log("Success: " + response);
 		}
 
 		callback(body);
