@@ -60,14 +60,14 @@ function run(db) {
 		var $ = cheerio.load(body);
 		next = $('.bloco-paginacao li a').each(function () {
 			var page = $(this).text().trim();
-			console.log("pagina: "+page);
-			if(page != 1){
+			//console.log("pagina: "+page);
+			//if(page != 1){
 				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10", function (body) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
 					var elements = $("div.titulos").each(fetchItem($(this), page));
 				});
-			}
+			//}
 
 		});
 	
