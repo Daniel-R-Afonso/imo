@@ -51,8 +51,8 @@ function run(db) {
 		fetchPage("https://www.habinedita.com"+next, function (body) {
 			// Use cheerio to find things in the page with css selectors.
 			var $ = cheerio.load(body);
-			next = $('.bloco-paginacao li a').each(function () {
-				var pagina = $(this).text().trim();
+			next = $('.bloco-paginacao li').each(function () {
+				var pagina = $("a").text().trim();
 			        console.log("pagina: "+items);
 		        });
 			next = $('a.paginacao-nav').attr('href');
