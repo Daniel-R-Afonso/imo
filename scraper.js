@@ -55,6 +55,7 @@ function run(db) {
 				var pagina = $(this).text().trim();
 			        console.log("pagina: "+pagina);
 		        });
+			console.log("next: "+next);
 			next = $('a.paginacao-nav').attr('href');
 			console.log("next :"+next);
 			var elements = $(".lbl_preco").each(function () {
@@ -66,8 +67,6 @@ function run(db) {
 			});
 			readRows(db);
 			db.close();
-			
-			
 		});
 		page++;
 		console.log("in page "+page);
