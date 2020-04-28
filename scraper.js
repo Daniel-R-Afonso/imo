@@ -53,7 +53,7 @@ function run(db) {
 			var $ = cheerio.load(body);
 			next = $('.bloco-paginacao li').each(function () {
 				var pagina = $("a").text().trim();
-			        console.log("pagina: "+items);
+			        console.log("pagina: "+pagina);
 		        });
 			next = $('a.paginacao-nav').attr('href');
 			console.log("next :"+next);
@@ -71,7 +71,7 @@ function run(db) {
 		});
 		page++;
 		console.log("in page "+page);
-	}while(page < 4);
+	}while(page < 1);
 	console.log("out page "+page);
 	console.log("out items "+items);
 }
