@@ -59,10 +59,11 @@ function run(db) {
 					next = $('a.paginacao-nav').attr('href');
 					var elements = $("div.titulos").each(function () {
 						console.log($(this));
-						//var titulo = $('span.span_imovel_titulo').text().trim();
-						//var nome = $('span.lbl_preco').text().trim();
-						//var url = $('a.lnk_titulo').attr('href');
-						//console.log(titulo+" "+nome+" "+url);
+						$(this).
+						var titulo = $('div.titulos > span.span_imovel_titulo').text().trim();
+						var nome = $('div.titulos > span.lbl_preco').text().trim();
+						var url = $('div.titulos > a.lnk_titulo').attr('href');
+						console.log(titulo+" "+nome+" "+url);
 						//items++;
 						//console.log(items);
 						//updateRow(db, nome, url);
