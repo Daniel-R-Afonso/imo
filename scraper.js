@@ -58,13 +58,14 @@ function run(db) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
 					var elements = $("div.titulos").each(function () {
-						var titulo = $('span.span_imovel_titulo').text().trim();
-						var nome = $('span.lbl_preco').text().trim();
-						var url = $('a.lnk_titulo').attr('href');
-						console.log(titulo+" "+nome+" "+url);
-						items++;
-						console.log(items);
-						updateRow(db, nome, url);
+						console.log($(this));
+						//var titulo = $('span.span_imovel_titulo').text().trim();
+						//var nome = $('span.lbl_preco').text().trim();
+						//var url = $('a.lnk_titulo').attr('href');
+						//console.log(titulo+" "+nome+" "+url);
+						//items++;
+						//console.log(items);
+						//updateRow(db, nome, url);
 					});
 				});
 			}
