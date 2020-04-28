@@ -45,36 +45,38 @@ function fetchPage(url, callback) {
 function run(db) {
 	// Use request to read in pages.
 	var page=1
-	
-	
-	do{
-		var items = 0;
-		var next = "/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10"
-		fetchPage("https://www.habinedita.com"+next, function (body) {
-			// Use cheerio to find things in the page with css selectors.
-			var $ = cheerio.load(body);
-			next = $('.bloco-paginacao li a').each(function () {
-				var pagina = $(this).text().trim();
-			        console.log("pagina: "+pagina);
-		        });
-			console.log("next: "+next);
-			next = $('a.paginacao-nav').attr('href');
-			console.log("next :"+next);
-			var elements = $(".lbl_preco").each(function () {
-				var nome = $(this).text().trim();
-				var url = $(this).parent().attr('href');
-				items++;
-				console.log(items);
-				updateRow(db, nome, url);
-			});
-			readRows(db);
-			db.close();
+	var items = 0;
+	var next = "/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10"
+	fetchPage("https://www.habinedita.com"+next, function (body) {
+		// Use cheerio to find things in the page with css selectors.
+		var $ = cheerio.load(body);
+		next = $('.bloco-paginacao li a').each(function () {
+			var pagina = $(this).text().trim();
+			console.log("pagina: "+pagina);
+			if(pagina != 1){
+				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+pagina+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10", function (body) {
+					var $ = cheerio.load(body);
+					next = $('a.paginacao-nav').attr('href');
+					var elements = $(".lbl_preco").each(function () {
+						var nome = $(this).text().trim();
+						var url = $(this).parent().attr('href');
+						items++;
+						console.log(items);
+						updateRow(db, nome, url);
+					});
+				});
+			}
+
 		});
-		page++;
-		console.log("in page "+page);
-	}while(page < 1);
-	console.log("out page "+page);
-	console.log("out items "+items);
+		var elements = $(".lbl_preco").each(function () {
+		var nome = $(this).text().trim();
+		var url = $(this).parent().attr('href');
+		items++;
+		console.log(items);
+		updateRow(db, nome, url);
+	});
+	page++;
+	console.log("in page "+page);
 }
 
 initDatabase(run);
