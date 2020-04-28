@@ -8,6 +8,7 @@ function initDatabase(callback) {
 	// Set up sqlite database.
 	var db = new sqlite3.Database("data.sqlite");
 	db.serialize(function() {
+		db.run("DROP TABLE IF EXISTS habinedita");
 		db.run("CREATE TABLE IF NOT EXISTS habinedita (titulo TEXT,valor TEXT,url TEXT,date INT)");
 		callback(db);
 	});
