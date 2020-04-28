@@ -42,13 +42,11 @@ function fetchPage(url, callback) {
 	});
 }
 
-function fetchItem(obj_this) {
+function fetchItem(obj_this, page) {
 	var titulo = obj_this.find('span.span_imovel_titulo').text().trim();
 	var nome = obj_this.find('span.lbl_preco').text().trim();
 	var url = obj_this.find('a.lnk_titulo').attr('href');
-	console.log(titulo+" "+nome+" "+url);
-	items++;
-	console.log("item: "+items);
+	console.log(page+" "+titulo+" "+nome+" "+url);
 	updateRow(db, titulo, nome, url);
 }
 
@@ -61,19 +59,19 @@ function run(db) {
 		// Use cheerio to find things in the page with css selectors.
 		var $ = cheerio.load(body);
 		next = $('.bloco-paginacao li a').each(function () {
-			var pagina = $(this).text().trim();
-			console.log("pagina: "+pagina);
-			if(pagina != 1){
-				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+pagina+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10", function (body) {
+			var page = $(this).text().trim();
+			console.log("pagina: "+page);
+			if(page != 1){
+				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10", function (body) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
-					var elements = $("div.titulos").each(fetchItem($(this)));
+					var elements = $("div.titulos").each(fetchItem($(this), page));
 				});
 			}
 
 		});
 	
-		var elements = $("div.titulos").each(fetchItem($(this)));
+		//var elements = $("div.titulos").each(fetchItem($(this)));
 	});
 }
 
