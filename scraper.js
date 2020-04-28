@@ -68,16 +68,15 @@ function run(db) {
 			}
 
 		});
+	
+		var elements = $(".lbl_preco").each(function () {
+			var nome = $(this).text().trim();
+			var url = $(this).parent().attr('href');
+			items++;
+			console.log(items);
+			updateRow(db, nome, url);
+		});
 	});
-	var elements = $(".lbl_preco").each(function () {
-		var nome = $(this).text().trim();
-		var url = $(this).parent().attr('href');
-		items++;
-		console.log(items);
-		updateRow(db, nome, url);
-	});
-	page++;
-	console.log("in page "+page);
 }
 
 initDatabase(run);
