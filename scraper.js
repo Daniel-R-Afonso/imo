@@ -44,10 +44,10 @@ function fetchPage(url, callback) {
 
 function fetchItem(db, obj_this, page) {
 	var titulo = obj_this.find('span.span_imovel_titulo').text().trim();
-	var nome = obj_this.find('span.lbl_preco').text().trim();
+	var valor = obj_this.find('span.lbl_preco').text().trim();
 	var url = obj_this.find('a.lnk_titulo').attr('href');
-	console.log(page+" "+titulo+" "+nome+" "+url);
-	updateRow(db, titulo, nome, url);
+	console.log(page+" "+titulo+" "+valor+" "+url);
+	updateRow(db, titulo, valor, url);
 }
 
 function run(db) {
