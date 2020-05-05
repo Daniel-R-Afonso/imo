@@ -54,9 +54,10 @@ function fetchItem(db, obj_this, page) {
 function run(db) {
 	// Use request to read in pages.
 	var base = "https://www.habinedita.com";
+	var filter = "&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10";
 	var items = 0;
 	var page = 1
-	var next = "/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10"
+	var next = "/imoveis/?pg="+page+filter;
 	fetchPage("https://www.habinedita.com"+next, function (body) {
 		// Use cheerio to find things in the page with css selectors.
 		var $ = cheerio.load(body);
@@ -66,7 +67,7 @@ function run(db) {
 		
 			for (; page <= lastPage; page++) {
 				console.log("pagina: "+page);
-				fetchPage(base+ "/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10", function (body) {
+				fetchPage(base+ "/imoveis/?pg="+page+filter", function (body) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
 					var elements = $("div.titulos").each(function () {
