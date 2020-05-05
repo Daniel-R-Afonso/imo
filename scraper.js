@@ -8,6 +8,7 @@ function initDatabase(callback) {
 	// Set up sqlite database.
 	var db = new sqlite3.Database("data.sqlite");
 	db.serialize(function() {
+		//db.run("DROP TABLE IF EXISTS habinedita");
 		db.run("CREATE TABLE IF NOT EXISTS habinedita (titulo TEXT,valor TEXT,url TEXT,date INT)");
 		callback(db);
 	});
@@ -61,22 +62,40 @@ function run(db) {
 		var $ = cheerio.load(body);
 		var lastPage = $('span.paginacao-spacer').parent().text().replace(/\./g,'');
 		if(lastPage != 'undefined'){
-			console.log("lastPage: "+lastPage);
-		}
-		for (; page <= lastPage; page++) {
-			console.log("pagina: "+page);
-			fetchPage(base+ "/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10", function (body) {
-				var $ = cheerio.load(body);
-				next = $('a.paginacao-nav').attr('href');
-				var elements = $("div.titulos").each(function () {
-					var titulo = $(this).find('span.span_imovel_titulo').text().trim();
-					var valor = $(this).find('span.lbl_preco').text().trim();
-					var url = base+$(this).find('a.lnk_titulo').attr('href');
-					items++;
-					console.log(items+" "+titulo+" "+valor+" "+url);
-					updateRow(db, titulo, valor, url);
+			console.log("pages: "+lastPage);
+		
+			for (; page <= lastPage; page++) {
+				console.log("pagina: "+page);
+				fetchPage(base+ "/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10", function (body) {
+					var $ = cheerio.load(body);
+					next = $('a.paginacao-nav').attr('href');
+					var elements = $("div.titulos").each(function () {
+						var titulo = $(this).find('span.span_imovel_titulo').text().trim();
+						var valor = $(this).find('span.lbl_preco').text().trim();
+						var url = base+$(this).find('a.lnk_titulo').attr('href');
+						items++;
+						console.log(items+" "+titulo+" "+valor+" "+url);
+						updateRow(db, titulo, valor, url);
 
+					});
 				});
+			}
+		}else{
+			next = $('.bloco-paginacao li a').each(function () {
+				var page = $(this).text().trim();
+				console.log("pagina: "+page);
+				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10", function (body) {
+					var $ = cheerio.load(body);
+					next = $('a.paginacao-nav').attr('href');
+					var elements = $("div.titulos").each(function () {
+						var titulo = $(this).find('span.span_imovel_titulo').text().trim();
+						var valor = $(this).find('span.lbl_preco').text().trim();
+						var url = $(this).find('a.lnk_titulo').attr('href');
+						console.log(page+" "+titulo+" "+valor+" "+url);
+						updateRow(db, titulo, valor, url);
+					});
+				});
+
 			});
 		}
 		//var elements = $("div.titulos").each(fetchItem($(this)));
