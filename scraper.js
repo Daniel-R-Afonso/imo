@@ -54,7 +54,7 @@ function fetchItem(db, obj_this, page) {
 function run(db) {
 	// Use request to read in pages.
 	var base = "https://www.habinedita.com";
-	var filter = "&o=1&g=1&dd=13&cc=12&nq=2-4&p=-250000&ct=0000000000001&or=10";
+	var filter = "&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10";
 	var items = 0;
 	var page = 1
 	var next = "/imoveis/?pg="+page+filter;
@@ -86,7 +86,7 @@ function run(db) {
 			console.log("less than 6 pages");
 			next = $('.bloco-paginacao li a').each(function () {
 				var page = $(this).text().trim();
-				console.log("pagina: "+page);
+				console.log("page: "+page);
 				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+page+filter, function (body) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
@@ -101,7 +101,6 @@ function run(db) {
 
 			});
 		}
-		//var elements = $("div.titulos").each(fetchItem($(this)));
 	});
 }
 
