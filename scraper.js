@@ -58,6 +58,10 @@ function run(db) {
 	fetchPage("https://www.habinedita.com"+next, function (body) {
 		// Use cheerio to find things in the page with css selectors.
 		var $ = cheerio.load(body);
+		lastPage = $('span.paginacao-spacer').parent().text().trim();
+		if(lastPage != 'undefined'){
+			console.log("lastPage: "+lastPage);
+		}
 		next = $('.bloco-paginacao li a').each(function () {
 			var page = $(this).text().trim();
 			//console.log("pagina: "+page);
