@@ -87,13 +87,13 @@ function run(db) {
 			next = $('.bloco-paginacao li a').each(function () {
 				var page = $(this).text().trim();
 				console.log("page: "+page);
-				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+page+filter, function (body) {
+				fetchPage(base+"/imoveis/?pg="+page+filter, function (body) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
 					var elements = $("div.titulos").each(function () {
 						var titulo = $(this).find('span.span_imovel_titulo').text().trim();
 						var valor = $(this).find('span.lbl_preco').text().trim();
-						var url = $(this).find('a.lnk_titulo').attr('href');
+						var url = base+$(this).find('a.lnk_titulo').attr('href');
 						console.log(page+" "+titulo+" "+valor+" "+url);
 						updateRow(db, titulo, valor, url);
 					});
