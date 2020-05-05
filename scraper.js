@@ -62,7 +62,7 @@ function run(db) {
 		// Use cheerio to find things in the page with css selectors.
 		var $ = cheerio.load(body);
 		var lastPage = $('span.paginacao-spacer').parent().text().replace(/\./g,'');
-		if(lastPage != 'undefined'){
+		if(lastPage != 'undefined' && lastPage != ''){
 			console.log("more than 6 pages");
 			console.log("pages: "+lastPage);
 		
