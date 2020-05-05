@@ -67,7 +67,7 @@ function run(db) {
 		
 			for (; page <= lastPage; page++) {
 				console.log("pagina: "+page);
-				fetchPage(base+ "/imoveis/?pg="+page+filter", function (body) {
+				fetchPage(base+ "/imoveis/?pg="+page+filter, function (body) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
 					var elements = $("div.titulos").each(function () {
