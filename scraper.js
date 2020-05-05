@@ -62,7 +62,10 @@ function run(db) {
 		if(lastPage != 'undefined'){
 			console.log("lastPage: "+lastPage);
 		}
-		next = $('.bloco-paginacao li a').each(function () {
+		for (var i = 1; i <= lastPage; i++) {
+		  
+		
+		//next = $('.bloco-paginacao li a').each(function () {
 			var page = $(this).text().trim();
 			//console.log("pagina: "+page);
 			//if(page != 1){
@@ -79,8 +82,8 @@ function run(db) {
 				});
 			//}
 
-		});
-	
+		//});
+		}
 		//var elements = $("div.titulos").each(fetchItem($(this)));
 	});
 }
