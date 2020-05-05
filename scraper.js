@@ -62,7 +62,7 @@ function run(db) {
 		if(lastPage != 'undefined'){
 			console.log("lastPage: "+lastPage);
 		}
-		for (var page = 1; i <= lastPage; i++) {
+		for (var page = 1; page <= lastPage; page++) {
 		  
 		
 		//next = $('.bloco-paginacao li a').each(function () {
