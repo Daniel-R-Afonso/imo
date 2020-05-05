@@ -63,6 +63,7 @@ function run(db) {
 		var $ = cheerio.load(body);
 		var lastPage = $('span.paginacao-spacer').parent().text().replace(/\./g,'');
 		if(lastPage != 'undefined'){
+			console.log("more than 6 pages");
 			console.log("pages: "+lastPage);
 		
 			for (; page <= lastPage; page++) {
@@ -82,10 +83,11 @@ function run(db) {
 				});
 			}
 		}else{
+			console.log("less than 6 pages");
 			next = $('.bloco-paginacao li a').each(function () {
 				var page = $(this).text().trim();
 				console.log("pagina: "+page);
-				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10", function (body) {
+				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+page+filter, function (body) {
 					var $ = cheerio.load(body);
 					next = $('a.paginacao-nav').attr('href');
 					var elements = $("div.titulos").each(function () {
