@@ -62,11 +62,11 @@ function run(db) {
 		if(lastPage != 'undefined'){
 			console.log("lastPage: "+lastPage);
 		}
-		for (var i = 1; i <= lastPage; i++) {
+		for (var page = 1; i <= lastPage; i++) {
 		  
 		
 		//next = $('.bloco-paginacao li a').each(function () {
-			var page = $(this).text().trim();
+			//var page = $(this).text().trim();
 			//console.log("pagina: "+page);
 			//if(page != 1){
 				fetchPage("https://www.habinedita.com"+ "/imoveis/?pg="+page+"&o=1&g=1&dd=13&cc=12&nq=2-4&p=-300000&ct=0000000000001&or=10", function (body) {
