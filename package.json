@@ -6,6 +6,11 @@
     "request": "latest",
     "sqlite3": "latest"
   },
+  "engines": {
+    "node": "17.0.1",
+    "npm": "7.24.2",
+    "yarn": "1.22.15"
+  },
   "keywords": [
     "scraper",
     "morph"
