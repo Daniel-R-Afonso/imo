@@ -1,6 +1,7 @@
 {
   "name": "imo",
   "version": "1.0.0",
+  "description": "Item Scraper",
   "main": "scraper.js",
   "engines": {
     "node": "16.x"
@@ -11,6 +12,16 @@
     "tsc": "tsc",
     "start": "node scraper.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daniel-R-Afonso/imo.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Daniel-R-Afonso/imo/issues"
+  },
+  "homepage": "https://github.com/Daniel-R-Afonso/imo#readme",
   "devDependencies": {
     "@tsconfig/node16": "^16.1.1",
     "@types/cheerio": "^0.22.34",
