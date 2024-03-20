@@ -1,8 +1,15 @@
 {
-  "version": "0.0.1",
+  "name": "imo",
+  "version": "1.0.0",
   "main": "scraper.js",
   "engines": {
     "node": "16.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec \"npm run tsc || exit 1; npm run start\"",
+    "tsc": "tsc",
+    "start": "node scraper.js"
   },
   "devDependencies": {
     "@tsconfig/node16": "^16.1.1",
@@ -15,12 +22,9 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "cheerio": "latest",
-    "request": "latest",
-    "sqlite3": "latest"
-  },
-  "keywords": [
-    "scraper",
-    "morph"
-  ]
+    "cheerio": "^1.0.0-rc.12",
+    "luxon": "^3.4.3",
+    "request-promise": "^4.2.6",
+    "sqlite3": "^5.1.6"
+  }
 }
