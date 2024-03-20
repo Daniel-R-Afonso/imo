@@ -7,7 +7,7 @@
     "sqlite3": "latest"
   },
   "engines": {
-    "node": "7.X"
+    "node": "20.x"
   },
   "keywords": [
     "scraper",
